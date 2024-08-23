@@ -7,6 +7,7 @@
 
 ### How to save chat log
 ```bash
+1.
 $ bin/kafka-console-consumer.sh --bootstrap-server <localhost:9092> --topic <topic name> --from-beginning > <File name>.json
 ```
 
