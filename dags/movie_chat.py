@@ -39,7 +39,7 @@ with DAG(
         import os
         home_path = os.path.expanduser("~")
         data = save_movies(year)
-        file_path = f"{home_path}/data/mov_data/year={year}/data.json"
+        file_path = f"{home_path}/data/mov_data/{year}_data.json"
         save = save_json(data, file_path)
 
         print("save json")
@@ -50,7 +50,7 @@ with DAG(
     def branch_fun(year):
         import os
         home_path = os.path.expanduser("~")
-        path = os.path.join(home_path, f"{home_path}/data/mov_data/year={year}/data.json")
+        path = os.path.join(home_path, f"{home_path}/data/mov_data/{year}_data.json")
         
         print('*' * 30)
         print(path)
@@ -88,8 +88,27 @@ with DAG(
     rm_dir = BashOperator(
             task_id='rm.dir',
             bash_command="""
-                rm -rf ~/data/mov_data/year={{logical_date.strftime('%Y')}}
+                rm -rf ~/data/mov_data/{{logical_date.strftime('%Y')}}_data.json
             """
+            )
+
+
+    notify_success = BashOperator(
+            task_id='notify.success',
+            bash_command="""
+                echo "notify.success"
+                curl -X POST -H 'Authorization: Bearer mo6ux0e446tQ5tcw6gsvHbdAdPdehM0NYvD3XixCjxf' -F 'message=saved success' https://notify-api.line.me/api/notify
+            """,
+            trigger_rule="all_done"
+            )
+
+    notify_fail = BashOperator(
+            task_id='notify.fail',
+            bash_command="""
+                echo "notify.fail"
+                curl -X POST -H 'Authorization: Bearer mo6ux0e446tQ5tcw6gsvHbdAdPdehM0NYvD3XixCjxf' -F 'message=try again' https://notify-api.line.me/api/notify
+            """,
+            trigger_rule='one_failed'
             )
 
 
@@ -98,6 +117,8 @@ with DAG(
     branch_op >> save_json
     branch_op >> rm_dir
 
-    save_json >> end
-    rm_dir >> save_json >> end
+    save_json >> notify_success >> end
+    save_json >> notify_fail >> end
+
+    rm_dir >> save_json
 
