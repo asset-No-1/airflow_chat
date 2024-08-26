@@ -26,18 +26,19 @@ with DAG(
     max_active_runs=1,
     max_active_tasks=3,
     description='hello world DAG',
-    schedule="10 2 * * *",
+    schedule="@yearly",
     start_date=datetime(2020, 1, 1),
+    end_date=datetime(2023, 12, 31),
     catchup=True,
     tags=['chat', 'movie'],
 ) as dag:
 
 
     def save_json(year):
-        from teamchat.call import list2df, save_json
+        from teamchat.call import save_movies, save_json
         import os
         home_path = os.path.expanduser("~")
-        data = list2df(year)
+        data = save_movies(year)
         file_path = f"{home_path}/data/mov_data/year={year}/data.json"
         save = save_json(data, file_path)
 
@@ -48,8 +49,8 @@ with DAG(
 
     def branch_fun(year):
         import os
-        home_dir = os.path.expanduser("~")
-        path = os.path.join(home_dir, f"{home_path}/data/mov_data/year={year}/data.json")
+        home_path = os.path.expanduser("~")
+        path = os.path.join(home_path, f"{home_path}/data/mov_data/year={year}/data.json")
         
         print('*' * 30)
         print(path)
@@ -65,12 +66,13 @@ with DAG(
 
 
     start = EmptyOperator(task_id='start')
-    end = EmptyOperator(task_id='end')
+    end = EmptyOperator(task_id='end', trigger_rule="all_done")
 
 
     branch_op = BranchPythonOperator(
             task_id='branch.op',
-            python_callable=branch_fun
+            python_callable=branch_fun,
+            op_args=["{{logical_date.strftime('%Y')}}"]
             )
 
 
@@ -79,7 +81,8 @@ with DAG(
             python_callable=save_json,
             requirements=["git+https://github.com/asset-No-1/teamchat.git@api/d2.0.0"],
             system_site_packages=False,
-            op_args=["{{logical_date.strftime('%Y')}}"]
+            op_args=["{{logical_date.strftime('%Y')}}"],
+            trigger_rule="all_done"
             )
 
     rm_dir = BashOperator(
@@ -96,5 +99,5 @@ with DAG(
     branch_op >> rm_dir
 
     save_json >> end
-    rm_dir >> end
+    rm_dir >> save_json >> end
 
