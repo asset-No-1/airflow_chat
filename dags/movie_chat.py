@@ -46,17 +46,19 @@ with DAG(
         return save
 
 
-       def branch_fun(year):
+    def branch_fun(year):
         import os
         home_dir = os.path.expanduser("~")
         path = os.path.join(home_dir, f"{home_path}/data/mov_data/year={year}/data.json")
+        
         print('*' * 30)
         print(path)
         print('*' * 30)
-
+           
         if os.path.exists(path):
             print('존재')
             return "rm.dir" #rmdir.task_id
+
         else:
             print('존재x')
             return "save.json"
@@ -72,7 +74,13 @@ with DAG(
             )
 
 
-    save_json = EmptyOperator(task_id='save.json')
+    save_json = PythonVirtualenvOperator(
+            task_id='save.json',
+            python_callable=save_json,
+            requirements=["git+https://github.com/asset-No-1/teamchat.git@api/d2.0.0"],
+            system_site_packages=False,
+            op_args=["{{logical_date.strftime('%Y')}}"]
+            )
 
     rm_dir = BashOperator(
             task_id='rm.dir',
