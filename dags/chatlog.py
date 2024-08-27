@@ -8,8 +8,9 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonVirtualenvOperator,BranchPythonOperator
-from airflow_provider_kafka.operators.consume_from_topic import ConsumeFromTopicOperator
-from airflow_provider_kafka.operators.produce_to_topic import ProduceToTopicOperator
+#from airflow_provider_kafka.operators.consume_from_topic import ConsumeFromTopicOperator
+#from airflow_provider_kafka.operators.produce_to_topic import ProduceToTopicOperator
+from notify import producer_alarm
 
 with DAG(
     'chatlog',
@@ -67,12 +68,10 @@ with DAG(
             python_callable=process_exist
             )
 
-    task_read_success = BashOperator(
+    task_read_success = PythonOperator(
             task_id="read.success",
-            bash_command="""
-                    echo "read success"
-                    echo "kakao success alarm"
-                """
+            python_callable=producer_alarm
+            op_kwargs=[],
             )
 
     task_read_fail = BashOperator(
@@ -97,23 +96,14 @@ with DAG(
             python_callable=check_exist
             )
 
-    task_scrap_chatlog = ConsumeFromTopicOperator(
-            task_id="consume_from_topic",
-            topics=["Team1"],
-            apply_function=scrap_chatlogs, #위에 message 읽어와서 json 파일로 저장하는 python method 만들어야 함
-            apply_function_kwargs={"prefix": "consumed:::"},
-            consumer_config={
-                "bootstrap.servers": "ec2-43-203-210-250.ap-northeast-2.compute.amazonaws.com:9092",
-                "group.id": "team1-group",
-                "enable.auto.commit": False,
-                "auto.offset.reset": "earliest",
-            },
-            commit_cadence="end_of_batch",
-            max_messages=10,
-            max_batch_size=2,
+    task_scrap_chatlog = BashOperator(
+            task_id="scrap.chatlog",
+            bash_command="""
+                $SPARK_HOME/bin/spark-submit ~/codes/airflow_chat/py/get_json.py
+            """,
             )
 
-    task_start = EmptyOperator(task_id="start")
+    task_start = EmptyOperator(task_id="start")        
     task_end = EmptyOperator(task_id="end")
 
     task_start >> task_scrap_chatlog >> task_check_exist >> [task_read_success, task_read_fail]
