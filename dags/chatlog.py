@@ -7,9 +7,19 @@ from airflow import DAG
 # Operators; we need this to operate!
 from airflow.operators.bash import BashOperator
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python import PythonVirtualenvOperator,BranchPythonOperator
+from airflow.operators.python import PythonOperator,BranchPythonOperator
 #from airflow_provider_kafka.operators.consume_from_topic import ConsumeFromTopicOperator
 #from airflow_provider_kafka.operators.produce_to_topic import ProduceToTopicOperator
+
+import sys 
+import os
+
+# Add the directory containing notify.py to the Python path
+# 그냥 import notify를 하기에는 모듈을 가져오는 경로(sys.path)에 해당하는 모듈이 없기 때문에
+# ModuleNotFoundError가 뜬다
+# 그래서 경로를 아래코드로 추가
+sys.path.append(os.path.join(os.path.dirname(__file__), '../py'))
+
 from notify import producer_alarm
 
 with DAG(
@@ -47,7 +57,7 @@ with DAG(
         else:
             return "process.fail"
 
-    task_process_success = BashOperator(
+    task_process_success = PythonOperator(
             task_id="process.success",
             python_callable=producer_alarm,
             op_args=["[Notify!!] print the result of chatlog stats successful!"]
