@@ -97,7 +97,11 @@ with DAG(
             task_id='notify.success',
             bash_command="""
                 echo "notify.success"
-                curl -X POST -H 'Authorization: Bearer mo6ux0e446tQ5tcw6gsvHbdAdPdehM0NYvD3XixCjxf' -F 'message=saved success' https://notify-api.line.me/api/notify
+                curl -X POST -H 'Authorization: Bearer mo6ux0e446tQ5tcw6gsvHbdAdPdehM0NYvD3XixCjxf' -F 'message=movie saved success' https://notify-api.line.me/api/notify
+                curl -X POST -H 'Authorization: Bearer r3eOvuEyvYYVl61veKSLZ4Kvdow6lk6Wto7SSLbskCJ' -F 'message=movie saved success' https://notify-api.line.me/api/notify
+                curl -X POST -H 'Authorization: Bearer bv3Eyutr8xLTkSvr5PORGQE3CpCeepZtabm5wwfjbC8' -F 'message=movie saved success' https://notify-api.line.me/api/notify
+                curl -X POST -H 'Authorization: Bearer Z8YBrqP1LU77V2VIOwNIxiBjZoqo9fyDrwsL0smkjYh' -F 'message=movie saved success' https://notify-api.line.me/api/notify
+
             """,
             trigger_rule="all_done"
             )
@@ -106,6 +110,9 @@ with DAG(
             task_id='notify.fail',
             bash_command="""
                 echo "notify.fail"
+                curl -X POST -H 'Authorization: Bearer r3eOvuEyvYYVl61veKSLZ4Kvdow6lk6Wto7SSLbskCJ' -F 'message=try again' https://notify-api.line.me/api/notify
+                curl -X POST -H 'Authorization: Bearer bv3Eyutr8xLTkSvr5PORGQE3CpCeepZtabm5wwfjbC8' -F 'message=try again' https://notify-api.line.me/api/notify
+                curl -X POST -H 'Authorization: Bearer Z8YBrqP1LU77V2VIOwNIxiBjZoqo9fyDrwsL0smkjYh' -F 'message=try again' https://notify-api.line.me/api/notify
                 curl -X POST -H 'Authorization: Bearer mo6ux0e446tQ5tcw6gsvHbdAdPdehM0NYvD3XixCjxf' -F 'message=try again' https://notify-api.line.me/api/notify
             """,
             trigger_rule='one_failed'
