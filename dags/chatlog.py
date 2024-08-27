@@ -49,18 +49,14 @@ with DAG(
 
     task_process_success = BashOperator(
             task_id="process.success",
-            bash_command="""
-                    echo "process success"
-                    echo "kakao success alarm"
-                """
+            python_callable=producer_alarm,
+            op_args=["[Notify!!] print the result of chatlog stats successful!"]
             )
 
-    task_process_fail = BashOperator(
+    task_process_fail = PythonOperator(
             task_id="process.fail",
-            bash_command="""
-                    echo "process fail"
-                    echo "kakao fail alarm"
-                """
+            python_callable=producer_alarm,
+            op_args=["[Notify!!] print the result of chatlog stats failed!"]
             )
 
     task_process_branch = BranchPythonOperator(
@@ -70,16 +66,14 @@ with DAG(
 
     task_read_success = PythonOperator(
             task_id="read.success",
-            python_callable=producer_alarm
-            op_kwargs=[],
+            python_callable=producer_alarm,
+            op_args=["[Notify!!] 채팅 로그 json file을 성공적으로 읽었습니다!"] 
             )
 
-    task_read_fail = BashOperator(
+    task_read_fail = PythonOperator(
             task_id="read.fail",
-            bash_command="""
-                    echo "read fail"
-                    echo "kakao fail alarm"
-                """
+            python_callable=producer_alarm,
+            op_args=["[Notify!!] 채팅 로그 json file을 읽지 못했습니다!"]
             )
 
     task_process = BashOperator(
@@ -93,14 +87,15 @@ with DAG(
 
     task_check_exist = BranchPythonOperator(
             task_id="check.exist",
-            python_callable=check_exist
+            python_callable=check_exist,
+            trigger_rule="one_failed"
             )
 
     task_scrap_chatlog = BashOperator(
             task_id="scrap.chatlog",
             bash_command="""
                 $SPARK_HOME/bin/spark-submit ~/codes/airflow_chat/py/get_json.py
-            """,
+            """
             )
 
     task_start = EmptyOperator(task_id="start")        
