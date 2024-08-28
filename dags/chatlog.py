@@ -39,12 +39,25 @@ with DAG(
     catchup=True,
     tags=["pyspark","chat"],
 ) as dag:
-
-    def check_exist():
+    
+    def check_existed():
         import os
 
         home_path = os.path.expanduser("~")
-        if(os.path.exists(f"{home_path}/codes/airflow_chat/chat_messages.json")):
+        airflow_home = os.environ.get("AIRFLOW_HOME", "")
+        print(f"{airflow_home}/chat_messages.json")
+        if(os.path.exists(f"{airflow_home}/chat_messages.json")):
+            return "remove.json"
+        else:
+            return "scrap.chatlog"
+
+    def check_produced():
+        import os
+
+        home_path = os.path.expanduser("~")
+        airflow_home = os.environ.get("AIRFLOW_HOME", "")
+        print(f"{airflow_home}/chat_messages.json")
+        if(os.path.exists(f"{airflow_home}/chat_messages.json")):
             return "read.success"
         else:
             return "read.fail"
@@ -53,7 +66,8 @@ with DAG(
         import os
 
         home_path = os.path.expanduser("~")
-        if(os.path.exists(f"{home_path}/codes/teamchat/process.txt")):
+        airflow_home = os.environ.get("AIRFLOW_HOME", "")
+        if(os.path.exists(f"{airflow_home}/process.txt")):
             return "process.success"
         else:
             return "process.fail"
@@ -61,13 +75,13 @@ with DAG(
     task_process_success = PythonOperator(
             task_id="process.success",
             python_callable=producer_alarm,
-            op_args=["[Notify!!] print the result of chatlog stats successful!"]
+            op_args=["[Notify!!] 제플린으로 통계보고서를 성공적으로 저장했습니다!"]
             )
 
     task_process_fail = PythonOperator(
             task_id="process.fail",
             python_callable=producer_alarm,
-            op_args=["[Notify!!] print the result of chatlog stats failed!"]
+            op_args=["[Notify!!] 제플린 통계보고서 저장을 실패했습니다!"]
             )
 
     task_process_branch = BranchPythonOperator(
@@ -98,29 +112,31 @@ with DAG(
 
     task_check_produced_json = BranchPythonOperator(
             task_id="check.produced_json",
-            python_callable=check_exist,
-            trigger_rule="one_failed"
+            python_callable=check_produced
             )
 
     task_scrap_chatlog = BashOperator(
             task_id="scrap.chatlog",
             bash_command="""
-                $SPARK_HOME/bin/spark-submit ~/codes/airflow_chat/py/get_json.py
-            """
+                $SPARK_HOME/bin/spark-submit $AIRFLOW_HOME/py/get_json.py
+            """,
+            trigger_rule="none_failed"
             )
 
     task_remove_json = BashOperator(
             task_id="remove.json",
-            bash_command
+            bash_command="""
+                    rm $AIRFLOW_HOME/chat_messages.json
+                """
             )
 
-    task_check_existed_json = BashOperator(
+    task_check_existed_json = BranchPythonOperator(
             task_id="check.exist_json",
-            bash
+            python_callable=check_existed,
             )
 
     task_start = EmptyOperator(task_id="start")        
-    task_end = EmptyOperator(task_id="end")
+    task_end = EmptyOperator(task_id="end", trigger_rule="none_failed")
 
     task_start >> task_check_existed_json 
     

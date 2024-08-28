@@ -12,34 +12,6 @@
 {"message": "3", "time": 1724639986.983253}
 {"message": "3", "time": 1724639987.169096}
 {"message": "3", "time": 1724639987.372174}
-{"message": {"message": "hey", "time": 1724638365.370501}
-{"message": "you", "time": 1724638365.8333209}
-{"message": "i dont know", "time": 1724638367.888732}
-{"message": "where we are", "time": 1724638370.721886}
-{"message": "hehe", "time": 1724638372.566543}
-{"message": "이번테스트 2", "time": 1724639853.596558}
-{"message": "원투웬투", "time": 1724639856.61302}
-{"message": "hey", "time": 1724639978.404062}
-{"message": "what's up", "time": 1724639980.575166}
-{"message": "마이크 테으스", "time": 1724639985.7010381}
-{"message": "3", "time": 1724639986.25697}
-{"message": "3", "time": 1724639986.983253}
-{"message": "3", "time": 1724639987.169096}
-{"message": "3", "time": 1724639987.372174}
-{"message": {"message": "hey", "time": 1724638365.370501}
-{"message": "you", "time": 1724638365.8333209}
-{"message": "i dont know", "time": 1724638367.888732}
-{"message": "where we are", "time": 1724638370.721886}
-{"message": "hehe", "time": 1724638372.566543}
-{"message": "이번테스트 2", "time": 1724639853.596558}
-{"message": "원투웬투", "time": 1724639856.61302}
-{"message": "hey", "time": 1724639978.404062}
-{"message": "what's up", "time": 1724639980.575166}
-{"message": "마이크 테으스", "time": 1724639985.7010381}
-{"message": "3", "time": 1724639986.25697}
-{"message": "3", "time": 1724639986.983253}
-{"message": "3", "time": 1724639987.169096}
-{"message": "3", "time": 1724639987.372174}
 {"message": "가즈아아아", "time": 1724640010.7677484}
 {"message": "hello", "time": 1724640025.9562733}
 {"message": "my", "time": 1724640027.9459288}
@@ -2009,3 +1981,95 @@
 {"user": "user1", "message": "exit", "time": "2024-08-28 11:19:55"}
 {"user": "user1", "message": "Hi", "time": "2024-08-28 11:21:35"}
 {"user": "user1", "message": "exit", "time": "2024-08-28 11:21:38"}
+{"user": "user1", "message": "@싸움의기술", "time": "2024-08-28 11:24:37"}
+{"user": "user1", "message": "@싸움의 기술", "time": "2024-08-28 11:24:42"}
+{"user": "user1", "message": "exit", "time": "2024-08-28 11:24:47"}
+{"user": "user1", "message": "@싸움의기술", "time": "2024-08-28 11:36:02"}
+{"user": "user1", "message": "@싸움의 기술", "time": "2024-08-28 11:36:05"}
+{"user": "user1", "message": "@싸움의 기술", "time": "2024-08-28 11:36:09"}
+{"user": "user1", "message": "\u001b[A\u001b[B", "time": "2024-08-28 11:36:11"}
+{"user": "user1", "message": "", "time": "2024-08-28 11:36:12"}
+{"user": "user1", "message": "", "time": "2024-08-28 11:36:13"}
+{"user": "user1", "message": "exit", "time": "2024-08-28 11:36:21"}
+{"user": "user1", "message": "@싸움의기술", "time": "2024-08-28 11:39:54"}
+{"user": "user1", "message": "@싸움의 기술", "time": "2024-08-28 11:39:59"}
+{"user": "user1", "message": "@싸움의 기술2", "time": "2024-08-28 11:40:02"}
+{"user": "user1", "message": "싸움긔이술2", "time": "2024-08-28 11:40:11"}
+{"user": "user1", "message": "싸움의기술2", "time": "2024-08-28 11:40:14"}
+{"user": "user1", "message": "@싸움의기술2", "time": "2024-08-28 11:40:16"}
+{"user": "user1", "message": "exit", "time": "2024-08-28 11:40:25"}
+{"user": "user1", "message": "@싸움의기술", "time": "2024-08-28 11:41:02"}
+{"user": "user1", "message": "@싸움의 기술2", "time": "2024-08-28 11:41:06"}
+{"user": "user1", "message": "exit", "time": "2024-08-28 11:41:08"}
+{"user": "movie", "message": "@거룩한술꾼의전설", "time": "2024-08-28 11:43:19"}
+{"user": "movie", "message": "@싸움의 기술", "time": "2024-08-28 11:43:24"}
+{"user": "movie", "message": "\u001b[A\u001b[A\u001b[A\u001b[A\u001b[A\u001b[A\u001b[A\u001b[A\u001b[A\u001b[A\u001b[A\u001b[B\u001b[B\u001b[B\u001b[B\u001b[B\u001b[B\u001b[B\u001b[B\u001b[B\u001b[A\u001b[A\u001b[A\u001b[A\u001b[A\u001b[A\u001b[A", "time": "2024-08-28 11:43:29"}
+{"user": "movie", "message": "@싸움의기술2", "time": "2024-08-28 11:43:39"}
+{"user": "movie", "message": "@싸움의 기술 2", "time": "2024-08-28 11:43:43"}
+{"user": "movie", "message": "", "time": "2024-08-28 11:43:47"}
+{"user": "movie", "message": "ㄷ", "time": "2024-08-28 11:44:35"}
+{"user": "movie", "message": "exit", "time": "2024-08-28 11:44:37"}
+{"user": "user1", "message": "Hi", "time": "2024-08-28 11:46:07"}
+{"user": "user1", "message": "HI", "time": "2024-08-28 11:46:09"}
+{"user": "user1", "message": "@엔드겜", "time": "2024-08-28 11:46:22"}
+{"user": "user1", "message": "@어벤져스", "time": "2024-08-28 11:46:26"}
+{"user": "user1", "message": "exit", "time": "2024-08-28 11:46:47"}
+{"user": "exit", "message": "exit", "time": "2024-08-28 11:46:54"}
+{"user": "movie", "message": "@아무영화", "time": "2024-08-28 11:49:31"}
+{"user": "movie", "message": "@어벤져스", "time": "2024-08-28 11:49:38"}
+{"user": "movie", "message": "@추격자", "time": "2024-08-28 11:49:39"}
+{"user": "movie", "message": "@애프터썬", "time": "2024-08-28 11:49:48"}
+{"user": "movie", "message": "exit", "time": "2024-08-28 11:50:02"}
+{"user": "movie", "message": "@애프터썬", "time": "2024-08-28 11:50:47"}
+{"user": "movie", "message": "", "time": "2024-08-28 11:50:49"}
+{"user": "movie", "message": "@애프터썬", "time": "2024-08-28 11:50:54"}
+{"user": "movie", "message": "", "time": "2024-08-28 11:50:57"}
+{"user": "movie", "message": "@싸움의기술", "time": "2024-08-28 11:51:02"}
+{"user": "movie", "message": "============================================", "time": "2024-08-28 11:51:11"}
+{"user": "movie", "message": "@애프터썬", "time": "2024-08-28 11:51:14"}
+{"user": "movie", "message": "@애나벨", "time": "2024-08-28 11:51:28"}
+{"user": "movie2", "message": "@애프터썬", "time": "2024-08-28 11:52:04"}
+{"user": "movie", "message": "@", "time": "2024-08-28 11:52:06"}
+{"user": "movie", "message": "", "time": "2024-08-28 11:52:06"}
+{"user": "movie2", "message": "@애나벨", "time": "2024-08-28 11:52:14"}
+{"user": "movie", "message": "", "time": "2024-08-28 11:52:16"}
+{"user": "movie", "message": "\u001b[1;3Aexit", "time": "2024-08-28 11:52:20"}
+{"user": "movie", "message": "exit", "time": "2024-08-28 11:52:23"}
+{"user": "movie2", "message": "안녕하세요", "time": "2024-08-28 11:52:34"}
+{"user": "movie", "message": "안녕", "time": "2024-08-28 11:52:36"}
+{"user": "movie2", "message": "", "time": "2024-08-28 11:52:40"}
+{"user": "movie2", "message": "", "time": "2024-08-28 11:52:43"}
+{"user": "movie2", "message": "", "time": "2024-08-28 11:52:43"}
+{"user": "movie2", "message": "", "time": "2024-08-28 11:52:44"}
+{"user": "movie2", "message": "", "time": "2024-08-28 11:52:44"}
+{"user": "movie2", "message": "", "time": "2024-08-28 11:52:45"}
+{"user": "movie2", "message": "", "time": "2024-08-28 11:52:46"}
+{"user": "movie2", "message": "", "time": "2024-08-28 11:52:48"}
+{"user": "movie2", "message": "exit", "time": "2024-08-28 11:52:51"}
+{"user": "", "message": "mov", "time": "2024-08-28 11:52:57"}
+{"user": "", "message": "v", "time": "2024-08-28 11:52:59"}
+{"user": "", "message": "asdfjasdfkl", "time": "2024-08-28 11:53:00"}
+{"user": "movie", "message": "asdjaljsfd", "time": "2024-08-28 11:53:01"}
+{"user": "movie", "message": "adsfjlasdfjl", "time": "2024-08-28 11:53:03"}
+{"user": "", "message": "asfjalsfjl", "time": "2024-08-28 11:53:05"}
+{"user": "movie", "message": "dkajlkdsfjl", "time": "2024-08-28 11:53:07"}
+{"user": "", "message": "asldkfjaslfd", "time": "2024-08-28 11:53:08"}
+{"user": "movie", "message": "dfjkadsfjlkasdf", "time": "2024-08-28 11:53:10"}
+{"user": "", "message": "asdfjlhasfjlasfd", "time": "2024-08-28 11:53:12"}
+{"user": "", "message": "\u001b[1;3Basldfkjaslfdasfd", "time": "2024-08-28 11:53:13"}
+{"user": "", "message": "exit", "time": "2024-08-28 11:53:17"}
+{"user": "movie", "message": "exit", "time": "2024-08-28 11:53:19"}
+{"user": "movie", "message": "안녕", "time": "2024-08-28 11:56:18"}
+{"user": "movie2", "message": "안녕하세요", "time": "2024-08-28 11:56:23"}
+{"user": "movie", "message": "@애나벨", "time": "2024-08-28 11:56:28"}
+{"user": "movie", "message": "@애프터썬", "time": "2024-08-28 11:56:34"}
+{"user": "movie2", "message": "@애프터썬", "time": "2024-08-28 11:56:38"}
+{"user": "movie2", "message": "@애나벨", "time": "2024-08-28 11:56:40"}
+{"user": "movie2", "message": "@싸움의기술", "time": "2024-08-28 11:56:42"}
+{"user": "movie2", "message": "exit", "time": "2024-08-28 11:58:50"}
+{"user": "movie", "message": "", "time": "2024-08-28 11:58:51"}
+{"user": "movie", "message": "exit", "time": "2024-08-28 11:58:52"}
+{"user": "TL", "message": "안녕하세요", "time": "2024-08-28 12:05:03"}
+{"user": "TL", "message": "@싸움의 기술2", "time": "2024-08-28 12:06:21"}
+{"user": "TL", "message": "@싸 움의 기술2", "time": "2024-08-28 12:06:35"}
+{"user": "TL", "message": "exit", "time": "2024-08-28 12:06:59"}
