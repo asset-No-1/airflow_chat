@@ -33,10 +33,11 @@ with DAG(
         'retry_delay': timedelta(seconds=3)
     },
     description='inspect chatlog and summarize',
-    schedule="10 0 * * *",
-    start_date=datetime(2024, 8, 23),
-    end_date=datetime(2024, 8, 27),
-    catchup=True,
+    #schedule="10 0 * * *",
+    schedule_interval=timedelta(hours=12), #8월 27일부터 12시간마다 계속 실행
+    start_date=datetime(2024, 8, 27),
+    #end_date=datetime(2024, 8, 29),
+    catchup=False, #뭔지 공부 필요,
     tags=["pyspark","chat"],
 ) as dag:
     
@@ -67,7 +68,7 @@ with DAG(
 
         home_path = os.path.expanduser("~")
         airflow_home = os.environ.get("AIRFLOW_HOME", "")
-        if(os.path.exists(f"{airflow_home}/process.txt")):
+        if(os.path.exists(f"{airflow_home}/output.pdf")):
             return "process.success"
         else:
             return "process.fail"
@@ -104,7 +105,7 @@ with DAG(
     task_process = BashOperator(
             task_id="process.chatlog",
             bash_command="""
-                    echo "read chat log json"
+                    $SPARK_HOME/bin/spark-submit $AIRFLOW_HOME/py/process.py
                     echo "run zeppelin and look stats"
                     echo "export result file"
                 """
@@ -135,7 +136,10 @@ with DAG(
             python_callable=check_existed,
             )
 
-    task_start = EmptyOperator(task_id="start")        
+    task_start = BashOperator(
+            task_id="start",
+            bash_command="echo 12시간마다 실행중",
+            )        
     task_end = EmptyOperator(task_id="end", trigger_rule="none_failed")
 
     task_start >> task_check_existed_json 

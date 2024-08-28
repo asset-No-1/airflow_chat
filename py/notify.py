@@ -12,6 +12,6 @@ def producer_alarm(*args):
 
     message = args[0]
     data={'bot': message}
-    producer.send('chat', value=data)
+    producer.send('Product', value=data)
     producer.flush()
 
