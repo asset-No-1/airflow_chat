@@ -8,8 +8,9 @@ spark = SparkSession.builder.appName("GetMessageFromKafka").getOrCreate()
 
 # File Constants
 
+airflow_home = os.environ.get("AIRFLOW_HOME", "")
 OFFSET_FILE = 'consumer_offset.txt'
-OUTPUT_FILE = '/home/dohyun/codes/airflow_chat/chat_messages.json'
+OUTPUT_FILE = f'{airflow_home}/chat_messages.json'
 
 # 마지막으로 처리된 offset 저장
 def save_offset(offset):
