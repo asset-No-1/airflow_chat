@@ -1,11 +1,11 @@
 from kafka import KafkaConsumer, TopicPartition
 from json import loads
-import pyspark
-from pyspark.sql import SparkSession
+#import pyspark
+#from pyspark.sql import SparkSession
 import os
 import sys
 
-spark = SparkSession.builder.appName("joinDF").getOrCreate()
+#spark = SparkSession.builder.appName("joinDF").getOrCreate()
 
 OFFSET_FILE = 'consumer_offset.txt'
 

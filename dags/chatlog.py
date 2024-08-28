@@ -15,8 +15,7 @@ import sys
 import os
 
 # Add the directory containing notify.py to the Python path
-# 그냥 import notify를 하기에는 모듈을 가져오는 경로(sys.path)에 해당하는 모듈이 없기 때문에
-# ModuleNotFoundError가 뜬다
+# 그냥 import notify를 하기에는 모듈을 가져오는 경로(sys.path)에 해당하는 모듈이 없기 때문에 ModuleNotFoundError가 뜬다
 # 그래서 경로를 아래코드로 추가
 sys.path.append(os.path.join(os.path.dirname(__file__), '../py'))
 
