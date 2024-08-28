@@ -36,7 +36,6 @@ saved_offset = read_offset()
 
 # kafka consumer initialize
 consumer = KafkaConsumer(
-        #chat, # chat이라는 topic에서 message consume
         bootstrap_servers=['ec2-43-203-210-250.ap-northeast-2.compute.amazonaws.com:9092'],
         value_deserializer=lambda x: loads(x.decode('utf-8')),
         consumer_timeout_ms=5000,
@@ -50,7 +49,7 @@ consumer = KafkaConsumer(
 print("[Start] get consumer")
 
 # define the topic and partition
-p = TopicPartition('chat', 0) # 0 은 파티션 넘버
+p = TopicPartition('Product', 0) # 0 은 파티션 넘버
 consumer.assign([p])
 
 # 마지막으로 처리된 offset찾거나, 처음부터 읽기
