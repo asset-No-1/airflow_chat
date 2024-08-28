@@ -20,6 +20,7 @@ import os
 # 그래서 경로를 아래코드로 추가
 sys.path.append(os.path.join(os.path.dirname(__file__), '../py'))
 
+# 시스템 챗봇 기능이 있는 notify 모듈 import
 from notify import producer_alarm
 
 with DAG(
@@ -43,7 +44,7 @@ with DAG(
         import os
 
         home_path = os.path.expanduser("~")
-        if(os.path.exists(f"{home_path}/codes/teamchat/team6_240826_1_messages.json")):
+        if(os.path.exists(f"{home_path}/codes/airflow_chat/chat_messages.json")):
             return "read.success"
         else:
             return "read.fail"
@@ -95,8 +96,8 @@ with DAG(
                 """
             )
 
-    task_check_exist = BranchPythonOperator(
-            task_id="check.exist",
+    task_check_produced_json = BranchPythonOperator(
+            task_id="check.produced_json",
             python_callable=check_exist,
             trigger_rule="one_failed"
             )
@@ -108,10 +109,28 @@ with DAG(
             """
             )
 
+    task_remove_json = BashOperator(
+            task_id="remove.json",
+            bash_command
+            )
+
+    task_check_existed_json = BashOperator(
+            task_id="check.exist_json",
+            bash
+            )
+
     task_start = EmptyOperator(task_id="start")        
     task_end = EmptyOperator(task_id="end")
 
-    task_start >> task_scrap_chatlog >> task_check_exist >> [task_read_success, task_read_fail]
+    task_start >> task_check_existed_json 
+    
+    task_check_existed_json >> task_remove_json >> task_scrap_chatlog
+    task_check_existed_json >> task_scrap_chatlog
+
+    task_scrap_chatlog >> task_check_produced_json >> [task_read_success, task_read_fail]
+
     task_read_success >> task_process
+    
     task_process >> task_process_branch >>[task_process_success, task_process_fail] >> task_end
+    
     task_read_fail >> task_end
